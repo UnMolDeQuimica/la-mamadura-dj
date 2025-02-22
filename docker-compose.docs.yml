@@ -1,0 +1,16 @@
+services:
+  docs:
+    image: la_mamadura_local_docs
+    container_name: la_mamadura_local_docs
+    build:
+      context: .
+      dockerfile: ./compose/local/docs/Dockerfile
+    env_file:
+      - ./.envs/.local/.django
+    volumes:
+      - ./docs:/docs:z
+      - ./config:/app/config:z
+      - ./la_mamadura:/app/la_mamadura:z
+    ports:
+      - '9000:9000'
+    command: /start-docs
