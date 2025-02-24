@@ -57,8 +57,8 @@
 <body class="{% block bodyclass %}{% endblock bodyclass %}">
   {% block body %}
   <div class="mb-1">
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <div class="container-fluid">
+    <nav class="navbar center navbar-expand-md navbar-dark bg-dark">
+      <div class="container">
         <button class="navbar-toggler navbar-toggler-right"
                 type="button"
                 data-bs-toggle="collapse"
@@ -71,16 +71,10 @@
         <a class="navbar-brand" href="{% url 'home' %}">La Mamadura</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'home' %}">Home <span class="visually-hidden">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
             {% if request.user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link"
-                   href="{% url 'users:detail' request.user.pk %}">{% translate "My Profile" %}</a>
+                   href="{% url 'training:training_records_list' %}">{% translate "My Trainings" %}</a>
               </li>
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}
@@ -103,7 +97,7 @@
       </div>
     </nav>
   </div>
-  <div class="container">
+  <div class="text-center">
     {% if messages %}
       {% for message in messages %}
         <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
