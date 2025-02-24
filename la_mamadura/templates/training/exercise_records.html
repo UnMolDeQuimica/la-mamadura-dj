@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="mx-auto" style="width: 80%; height: 50%;">
+    <canvas id="myChart"></canvas>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+    var config = {
+        type: 'line',
+        data: {
+          datasets: [{
+              label: "{{ exercise }} ({{ units }})",
+              data: [
+                  {% for entry in entries %}
+                      {
+                          x: "{{ entry.date }}",
+                          y: "{{ entry.load }}",
+                          reps: "{{ entry.repetitions }}"
+                      },
+                  {% endfor %}
+              ]
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            },
+          }
+        },
+      }
+    new Chart(ctx, config);
+  </script>
+
+{% endblock content %}

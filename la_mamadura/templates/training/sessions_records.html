@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h1>💪 Trainings 💪</h1>
+<a href="{% url 'training:training_records_create' %}"><button class="btn btn-dark" style="margin: 25px;">Add training</button></a>
+<div>
+    {% for entry in entries %}
+    <div class="card mx-auto" style="width: 30rem; margin-bottom: 25px;" >
+        <div class="card-title">
+            <h2><a href="{% url 'training:training_records_create_exercise' id=entry.id %}" style="color: #fb3f00; text-decoration: none;">🗓️ {{ entry.date }} 🗓️</a></h2>
+        </div>
+        <div class="card-header">
+            🏋️ Exercices 🏋️
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for exercise in entry.exercise_record.all %}
+            <li class="list-group-item"><b> <a href="{% url 'training:exercise_record_graph' id=exercise.exercise.id %}" style="color: black; text-decoration: none;">{{ exercise.exercise.name }}</a></b>: <a href="{% url 'training:exercise_record_update' pk=exercise.pk %}" style="text-decoration: none;">{{ exercise.load }} {{ exercise.exercise.load_units }} x {{ exercise.repetitions }} reps</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock content %}
