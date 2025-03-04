@@ -31,12 +31,13 @@ services:
     volumes:
       - la_mamadura_local_postgres_data:/var/lib/postgresql/data
       - la_mamadura_local_postgres_data_backups:/backups
-    env_file:
-      - ./.envs/.local/.postgres
+    # env_file:
+      # - ./.envs/.local/.postgres
     environment:
+      POSTGRES_DB: postgres_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+    user: postgres
 
   redis:
     image: docker.io/redis:6

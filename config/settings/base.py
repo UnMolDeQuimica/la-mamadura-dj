@@ -50,10 +50,10 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
+        'NAME': 'postgres_db',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': '5432',
+        'HOST': 'postgres',
         'PORT': '5432'
     }
 }
