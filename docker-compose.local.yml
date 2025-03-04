@@ -33,6 +33,10 @@ services:
       - la_mamadura_local_postgres_data_backups:/backups
     env_file:
       - ./.envs/.local/.postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
 
   redis:
     image: docker.io/redis:6
