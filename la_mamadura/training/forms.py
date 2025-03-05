@@ -1,7 +1,9 @@
 from django.forms import ModelForm
 from django.forms import TextInput
 
-from la_mamadura.training.models import ExerciseRecord, TrainingSessionRecord, Exercise
+from la_mamadura.training.models import Exercise
+from la_mamadura.training.models import ExerciseRecord
+from la_mamadura.training.models import TrainingSessionRecord
 
 
 class CreateTrainingRecordForm(ModelForm):

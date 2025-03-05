@@ -1,5 +1,5 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
@@ -7,12 +7,12 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
-from django.views.generic import DetailView
 
 from la_mamadura.training.forms import CreateExcerciseRecordForm
 from la_mamadura.training.forms import CreateExcerciseRecordFromTrainingForm
+from la_mamadura.training.forms import CreateExerciseForm
 from la_mamadura.training.forms import CreateTrainingRecordForm
-from la_mamadura.training.forms import UpdateExerciseRecord, CreateExerciseForm
+from la_mamadura.training.forms import UpdateExerciseRecord
 from la_mamadura.training.models import Exercise
 from la_mamadura.training.models import ExerciseRecord
 from la_mamadura.training.models import TrainingSessionRecord
@@ -39,7 +39,6 @@ class TrainingSessionsRecordsList(LoginRequiredMixin, ListView):
         return TrainingSessionRecord.objects.filter(
             user__pk=self.request.user.pk,
         ).order_by("-date")
-        
 
     def get_context_data(self, *, object_list=..., **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
@@ -136,7 +135,8 @@ class ExerciseRecordUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse(
-            "training:exercise_record_update", kwargs={"pk": self.exercise_record.pk},
+            "training:exercise_record_update",
+            kwargs={"pk": self.exercise_record.pk},
         )
 
 
@@ -153,7 +153,8 @@ class ExerciseUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse(
-            "training:exercises_update", kwargs={"pk": self.excercise.pk}
+            "training:exercises_update",
+            kwargs={"pk": self.excercise.pk},
         )
 
 
@@ -163,7 +164,7 @@ class ExercisesListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Exercise.objects.all().order_by("name")
 
-    def get_context_data(self, *, object_list = ..., **kwargs):
+    def get_context_data(self, *, object_list=..., **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context["entries"] = self.get_queryset()
 
@@ -175,7 +176,7 @@ class CreateExerciseView(LoginRequiredMixin, CreateView):
     template_name = "training/exercise_create_form.html"
 
     def form_valid(self, form):
-        response =  super().form_valid(form)
+        response = super().form_valid(form)
         messages.success(self.request, message="Exercise created successfully!")
 
         return response

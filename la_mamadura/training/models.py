@@ -49,7 +49,10 @@ class Muscle(models.Model):
     )
 
     submuscles = models.ManyToManyField(
-        SubMuscle, related_name="muscle", blank=True, null=True,
+        SubMuscle,
+        related_name="muscle",
+        blank=True,
+        null=True,
     )
     image = models.ImageField(verbose_name=_("Image"), blank=True, null=True)
 
@@ -112,13 +115,22 @@ class Exercise(models.Model):
     explanation = models.TextField(verbose_name=_("Explanation"), blank=True)
     explanation_es = models.TextField(verbose_name=_("Explanation ES"), blank=True)
     submuscles = models.ManyToManyField(
-        SubMuscle, related_name="exercise", blank=True, null=True,
+        SubMuscle,
+        related_name="exercise",
+        blank=True,
+        null=True,
     )
     muscles = models.ManyToManyField(
-        Muscle, related_name="exercise", blank=True, null=True,
+        Muscle,
+        related_name="exercise",
+        blank=True,
+        null=True,
     )
     muscular_group = models.ManyToManyField(
-        MuscularGroup, related_name="exercise", blank=True, null=True,
+        MuscularGroup,
+        related_name="exercise",
+        blank=True,
+        null=True,
     )
     image = models.ImageField(verbose_name=_("Image"), blank=True, null=True)
 
@@ -201,4 +213,4 @@ class ExerciseRecord(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.exercise} - {self.date}: {self.load} {self.exercise.load_units} x {self.repetitions}" #noqa: E501
+        return f"{self.exercise} - {self.date}: {self.load} {self.exercise.load_units} x {self.repetitions}"  # noqa: E501

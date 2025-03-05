@@ -2,14 +2,13 @@ from django.urls import path
 
 from .views import CreateExcerciseRecord
 from .views import CreateExerciseRecordFromTrainingSession
+from .views import CreateExerciseView
 from .views import CreateTrainingSessionRecord
 from .views import ExerciseRecordsGraph
 from .views import ExerciseRecordUpdateView
-from .views import TrainingSessionsRecordsList
 from .views import ExercisesListView
 from .views import ExerciseUpdateView
-from .views import CreateExerciseView
-
+from .views import TrainingSessionsRecordsList
 
 app_name = "training"
 urlpatterns = [
@@ -46,16 +45,16 @@ urlpatterns = [
     path(
         "exercises/<int:pk>/",
         view=ExerciseUpdateView.as_view(),
-        name="exercises_update"
+        name="exercises_update",
     ),
     path(
         "exercises/",
         view=ExercisesListView.as_view(),
-        name="exercises_list"
+        name="exercises_list",
     ),
     path(
         "exercises/create/",
         view=CreateExerciseView.as_view(),
-        name="exercise_create"
-    )
+        name="exercise_create",
+    ),
 ]
