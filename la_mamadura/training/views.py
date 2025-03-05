@@ -154,7 +154,7 @@ class ExerciseUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse(
             "training:exercises_update",
-            kwargs={"pk": self.excercise.pk},
+            kwargs={"pk": self.exercise.pk},
         )
 
 
