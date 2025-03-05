@@ -52,7 +52,6 @@ class Muscle(models.Model):
         SubMuscle,
         related_name="muscle",
         blank=True,
-        null=True,
     )
     image = models.ImageField(verbose_name=_("Image"), blank=True, null=True)
 
@@ -118,19 +117,16 @@ class Exercise(models.Model):
         SubMuscle,
         related_name="exercise",
         blank=True,
-        null=True,
     )
     muscles = models.ManyToManyField(
         Muscle,
         related_name="exercise",
         blank=True,
-        null=True,
     )
     muscular_group = models.ManyToManyField(
         MuscularGroup,
         related_name="exercise",
         blank=True,
-        null=True,
     )
     image = models.ImageField(verbose_name=_("Image"), blank=True, null=True)
     image_url = models.URLField(verbose_name=_("Image URL"), blank=True, null=True)
