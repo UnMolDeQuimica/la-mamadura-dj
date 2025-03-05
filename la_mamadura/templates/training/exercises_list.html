@@ -11,6 +11,10 @@
         <div class="card-title">
             <h2><a href="{% url 'training:exercises_update' pk=entry.pk %}" style="color: #fb3f00; text-decoration: none;">🚴‍♂️🏊‍♂️ {{ entry.name }} 🤸‍♂️🏃‍♂️</a></h2>
         </div>
+        {% if entry.image_url != None %}
+        <img class="card-img-top" src='{{ entry.image_url }}' alt="Card image cap">
+        {% endif %}
+
         <div class="card-text">
             fdsfd
             {{ entry.explanation }}
