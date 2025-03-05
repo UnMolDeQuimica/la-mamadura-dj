@@ -6,6 +6,10 @@ from .views import CreateTrainingSessionRecord
 from .views import ExerciseRecordsGraph
 from .views import ExerciseRecordUpdateView
 from .views import TrainingSessionsRecordsList
+from .views import ExercisesListView
+from .views import ExerciseUpdateView
+from .views import CreateExerciseView
+
 
 app_name = "training"
 urlpatterns = [
@@ -39,4 +43,19 @@ urlpatterns = [
         view=CreateExerciseRecordFromTrainingSession.as_view(),
         name="training_records_create_exercise",
     ),
+    path(
+        "exercises/<int:pk>/",
+        view=ExerciseUpdateView.as_view(),
+        name="exercises_update"
+    ),
+    path(
+        "exercises/",
+        view=ExercisesListView.as_view(),
+        name="exercises_list"
+    ),
+    path(
+        "exercises/create/",
+        view=CreateExerciseView.as_view(),
+        name="exercise_create"
+    )
 ]

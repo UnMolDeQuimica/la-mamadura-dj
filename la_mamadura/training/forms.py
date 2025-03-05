@@ -1,8 +1,7 @@
 from django.forms import ModelForm
 from django.forms import TextInput
 
-from la_mamadura.training.models import ExerciseRecord
-from la_mamadura.training.models import TrainingSessionRecord
+from la_mamadura.training.models import ExerciseRecord, TrainingSessionRecord, Exercise
 
 
 class CreateTrainingRecordForm(ModelForm):
@@ -39,3 +38,9 @@ class UpdateExerciseRecord(ModelForm):
         widgets = {
             "date": TextInput(attrs={"type": "date"}),
         }
+
+
+class CreateExerciseForm(ModelForm):
+    class Meta:
+        model = Exercise
+        fields = "__all__"
