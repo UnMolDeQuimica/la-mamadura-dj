@@ -133,6 +133,7 @@ class Exercise(models.Model):
         null=True,
     )
     image = models.ImageField(verbose_name=_("Image"), blank=True, null=True)
+    image_url = models.URLField(verbose_name=_("Image URL"), blank=True, null=True)
 
     def __str__(self):
         return self.name
