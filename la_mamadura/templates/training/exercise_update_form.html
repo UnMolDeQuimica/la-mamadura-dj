@@ -7,12 +7,12 @@
     <div class="row">
         <h1>MODIFY EXERCISE</h1>
     </div>
-    
+    <a href="{% url 'training:exercise_create' %}"><button class="btn btn-dark" style="margin: 25px;">Add new exercise</button></a>
     <div class="mx-auto" style="width: 20rem;">
         <form method="post" class="my-class">
-            
+
             {% csrf_token %}
-            
+
             {{ form|crispy }}
 
             <input type="submit" class="btn btn-dark" value="Submit"></input>

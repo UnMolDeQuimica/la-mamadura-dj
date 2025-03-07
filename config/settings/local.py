@@ -14,7 +14,8 @@ SECRET_KEY = env(
     default="krrDzlEgayLmHMVclGijneBKtLRURb3gT0y8x4LCw5cbARCfFn0u7R8Gj5yxwPLD",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]  # noqa: S104
+ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1", "93.127.203.15", "unmoldequimica.site", "www.unmoldequimica.site"]  # noqa: S104
+CSRF_TRUSTED_ORIGINS = ["https://unmoldequimica.site", "https://www.unmoldequimica.site"]
 
 # CACHES
 # ------------------------------------------------------------------------------
