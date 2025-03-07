@@ -118,6 +118,7 @@ class ExerciseRecordsGraph(LoginRequiredMixin, ListView):
         context["exercise"] = self.exercise.name
         context["entries"] = self.get_queryset()
         context["units"] = self.exercise.load_units
+        context["exercises"] = Exercise.objects.all()
 
         return context
 
