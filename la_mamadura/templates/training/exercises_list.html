@@ -7,7 +7,7 @@
 <a href="{% url 'training:exercise_create' %}"><button class="btn btn-dark" style="margin: 25px;">Add exercise</button></a>
 <div>
     {% for entry in entries %}
-    <div class="card mx-auto" style="width: 30rem; margin-bottom: 25px;" >
+    <div class="card mx-auto" style="width: 375px; margin-bottom: 25px;" >
         <div class="card-title">
             <h2><a href="{% url 'training:exercises_update' pk=entry.pk %}" style="color: #fb3f00; text-decoration: none;">🚴‍♂️🏊‍♂️ {{ entry.name }} 🤸‍♂️🏃‍♂️</a></h2>
         </div>
