@@ -134,6 +134,8 @@ class Exercise(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["name",]
 
 class TrainingSession(models.Model):
     """
@@ -211,3 +213,6 @@ class ExerciseRecord(models.Model):
 
     def __str__(self) -> str:
         return f"{self.exercise} - {self.date}: {self.load} {self.exercise.load_units} x {self.repetitions}"  # noqa: E501
+
+    class Meta:
+        ordering = ["exercise__name", "date"]
