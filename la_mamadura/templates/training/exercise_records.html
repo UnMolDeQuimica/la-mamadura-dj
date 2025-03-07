@@ -11,28 +11,36 @@
   <script>
     const ctx = document.getElementById('myChart');
     var config = {
-        type: 'line',
         data: {
-          datasets: [{
-              label: "{{ exercise }} ({{ units }})",
-              data: [
-                  {% for entry in entries %}
-                      {
-                          x: "{{ entry.date }}",
-                          y: "{{ entry.load }}",
-                          reps: "{{ entry.repetitions }}"
-                      },
-                  {% endfor %}
-              ]
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            },
-          }
-        },
+          datasets: [
+          {
+            type: "line",
+            label: "{{ exercise }} {{ units }}",
+            data: [
+              {% for entry in entries%}
+                {
+                  x: "{{ entry.date }}",
+                  y: "{{ entry.load }}",
+                  reps: "{{ entry.repetitions }}"
+                },
+              {% endfor %}
+            ]
+          },
+          {
+            type: "bubble",
+            label: "{{ exercise }} {{ units }}",
+            data: [
+              {% for entry in entries%}
+                {
+                  x: "{{ entry.date }}",
+                  y: "{{ entry.load }}",
+                  r: "{{ entry.repetitions }}"
+                },
+              {% endfor %}
+            ]
+          },
+          ]
+        }
       }
     new Chart(ctx, config);
   </script>
