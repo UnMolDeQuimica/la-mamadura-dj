@@ -17,13 +17,6 @@ class SubMuscle(models.Model):
         blank=False,
         unique=True,
     )
-    name_es = models.CharField(
-        verbose_name=_("Name ES"),
-        max_length=255,
-        blank=False,
-        unique=True,
-    )
-
     image = models.ImageField(verbose_name=_("Image"), blank=True, null=True)
 
     def __str__(self):
@@ -41,13 +34,6 @@ class Muscle(models.Model):
         blank=False,
         unique=True,
     )
-    name_es = models.CharField(
-        verbose_name=_("Name ES"),
-        max_length=255,
-        blank=False,
-        unique=True,
-    )
-
     submuscles = models.ManyToManyField(
         SubMuscle,
         related_name="muscle",
@@ -70,13 +56,6 @@ class MuscularGroup(models.Model):
         blank=False,
         unique=True,
     )
-    name_es = models.CharField(
-        verbose_name=_("Name ES"),
-        max_length=255,
-        blank=False,
-        unique=True,
-    )
-
     muscles = models.ManyToManyField(Muscle, related_name="muscular_group")
     image = models.ImageField(verbose_name=_("Image"), blank=True, null=True)
 
@@ -104,15 +83,8 @@ class Exercise(models.Model):
         blank=False,
         unique=True,
     )
-    name_es = models.CharField(
-        verbose_name=_("Name ES"),
-        max_length=255,
-        blank=False,
-        unique=True,
-    )
     load_units = models.CharField(verbose_name=_("Load units"), choices=LOAD_UNITS)
-    explanation = models.TextField(verbose_name=_("Explanation"), blank=True)
-    explanation_es = models.TextField(verbose_name=_("Explanation ES"), blank=True)
+    description = models.TextField(verbose_name=_("Description"), blank=True)
     submuscles = models.ManyToManyField(
         SubMuscle,
         related_name="exercise",
