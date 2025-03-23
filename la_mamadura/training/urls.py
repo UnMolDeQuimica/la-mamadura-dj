@@ -9,6 +9,12 @@ from .views import ExerciseRecordUpdateView
 from .views import ExercisesListView
 from .views import ExerciseUpdateView
 from .views import TrainingSessionsRecordsList
+from .views import CreateExerciseTemplate
+from .views import UpdateExerciseTemplate
+from .views import CreateTrainingSessionTemplate
+from .views import UpdateTrainingSessionTemplate
+
+from . import views
 
 app_name = "training"
 urlpatterns = [
@@ -57,4 +63,45 @@ urlpatterns = [
         view=CreateExerciseView.as_view(),
         name="exercise_create",
     ),
+    path(
+        "exercise-templates/create",
+        view=CreateExerciseTemplate.as_view(),
+        name="exercise_templates_create",
+    ),
+    path(
+        "exercise-templates/<int:pk>",
+        view=UpdateExerciseTemplate.as_view(),
+        name="exercise_templates_update",
+    ),
+    path(
+        "exercise-templates/",
+        view=views.ListExerciseTemplate.as_view(),
+        name="exercise_templates_list",
+    ),
+    path(
+        "training-templates/create",
+        view=CreateTrainingSessionTemplate.as_view(),
+        name="training_session_templates_create",
+    ),
+    path(
+        "training-templates/<int:pk>",
+        view=UpdateTrainingSessionTemplate.as_view(),
+        name="training_session_templates_update",
+    ),
+    path(
+        "training-templates/",
+        view=views.ListTrainingSessionTemplate.as_view(),
+        name="training_session_templates_list",
+    ),
+    path(
+        "templates/",
+        view=views.TemplatesView.as_view(),
+        name="templates",
+    ),
+    path(
+        "training-from-template/",
+        view=views.CreateTrainingRecordFromTemplate.as_view(),
+        name="training_from_template"
+    )
 ]
+
