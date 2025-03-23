@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 <style>
     div {
         background: url('https://i.sstatic.net/LtCRM.png') center center repeat;
@@ -9,7 +9,7 @@
 
 {% block content %}
 
-<h1>WHO WANTS TO BECOME <b>MAMADO</b>?</h1>
+<h1>{% trans "WHO WANTS TO BECOME" %} <b>MAMADO</b>?</h1>
 <div style="height: 100000px; background: url('https://media1.tenor.com/m/yZWvqGRJNlAAAAAd/5x30-training.gif') center center repeat; "></div>
 
 {% endblock content %}

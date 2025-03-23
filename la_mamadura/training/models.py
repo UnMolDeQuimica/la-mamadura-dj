@@ -179,6 +179,7 @@ class ExerciseRecord(models.Model):
 
     training_session = models.ForeignKey(
         TrainingSessionRecord,
+        verbose_name=_("Training Session"),
         on_delete=models.CASCADE,
         related_name="exercise_record",
     )

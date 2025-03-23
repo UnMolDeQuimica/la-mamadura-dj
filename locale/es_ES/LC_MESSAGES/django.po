@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-23 14:06+0100\n"
+"POT-Creation-Date: 2025-03-23 13:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,167 +30,162 @@ msgstr ""
 #: .\la_mamadura\templates\allauth\layouts\entrance.html:8
 #: .\la_mamadura\templates\base.html:96
 msgid "Sign In"
-msgstr ""
+msgstr "Entrar"
 
 #: .\la_mamadura\templates\base.html:77
 msgid "My Trainings"
-msgstr ""
+msgstr "Mis Entrenamientos"
 
 #: .\la_mamadura\templates\base.html:81
 #: .\la_mamadura\templates\training\exercises_list.html:7
 msgid "Exercises"
-msgstr ""
+msgstr "Ejercicios"
 
 #: .\la_mamadura\templates\base.html:85
 msgid "Sign Out"
-msgstr ""
+msgstr "Salir"
 
 #: .\la_mamadura\templates\base.html:91
 msgid "Sign Up"
-msgstr ""
+msgstr "Registrarse"
 
 #: .\la_mamadura\templates\pages\home.html:12
 msgid "WHO WANTS TO BECOME"
-msgstr ""
+msgstr "¿Quién quiere devenir"
 
 #: .\la_mamadura\templates\training\exercise_create_form.html:9
 #: .\la_mamadura\templates\training\exercise_record_form.html:9
 msgid "REGISTER EXERCISE"
-msgstr ""
+msgstr "REGISTRAR EJERCICIO"
 
 #: .\la_mamadura\templates\training\exercise_record_from_training_form.html:9
 msgid "TRAINING"
-msgstr ""
+msgstr "ENTRENAMIENTO"
 
 #: .\la_mamadura\templates\training\exercise_record_from_training_form.html:14
 #: .\la_mamadura\templates\training\sessions_records.html:15
 msgid "Exercices"
-msgstr ""
+msgstr "Ejercicios"
 
 #: .\la_mamadura\templates\training\exercise_records.html:7
 msgid "Choose another exercise"
-msgstr ""
+msgstr "Elige otro ejercicio"
 
 #: .\la_mamadura\templates\training\exercise_records.html:14
 msgid "progress chart"
-msgstr ""
+msgstr "gráfica de progreso"
 
 #: .\la_mamadura\templates\training\exercise_update_form.html:9
-#: .\la_mamadura\templates\training\update_exercise_record_form.html:9
 msgid "MODIFY EXERCISE"
-msgstr ""
+msgstr "MODIFICAR EJERCICIO"
 
 #: .\la_mamadura\templates\training\exercise_update_form.html:11
 msgid "Add new exercise"
-msgstr ""
+msgstr "Agregar nuevo ejercicio"
 
 #: .\la_mamadura\templates\training\session_record_form.html:8
 msgid "REGISTER TRAINING"
-msgstr ""
+msgstr "REGISTRAR ENTRENAMIENTO"
 
 #: .\la_mamadura\templates\training\sessions_records.html:6
 msgid "Trainings"
-msgstr ""
+msgstr "Entrenamientos"
 
 #: .\la_mamadura\templates\training\sessions_records.html:7
 msgid "Add training"
-msgstr ""
+msgstr "Agregar entrenamiento"
 
 #: .\la_mamadura\training\apps.py:9
 msgid "Training"
-msgstr ""
+msgstr "Entrenamiento"
 
 #: .\la_mamadura\training\models.py:15 .\la_mamadura\training\models.py:32
 #: .\la_mamadura\training\models.py:54 .\la_mamadura\training\models.py:81
 #: .\la_mamadura\training\models.py:118
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: .\la_mamadura\training\models.py:20 .\la_mamadura\training\models.py:42
 #: .\la_mamadura\training\models.py:60 .\la_mamadura\training\models.py:103
 msgid "Image"
-msgstr ""
+msgstr "Imagen"
 
 #: .\la_mamadura\training\models.py:86
 msgid "Load units"
-msgstr ""
+msgstr "Unidades de carga"
 
 #: .\la_mamadura\training\models.py:87
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
 #: .\la_mamadura\training\models.py:104
 msgid "Image URL"
-msgstr ""
+msgstr "URL de la imagen"
 
 #: .\la_mamadura\training\models.py:149 .\la_mamadura\training\models.py:166
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 #: .\la_mamadura\training\models.py:153 .\la_mamadura\training\models.py:170
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #: .\la_mamadura\training\models.py:173
 msgid "Exercise"
-msgstr ""
+msgstr "Ejercicio"
 
 #: .\la_mamadura\training\models.py:177
 msgid "Repetitions"
-msgstr ""
+msgstr "Repeticiones"
 
 #: .\la_mamadura\training\models.py:178
 msgid "Load"
-msgstr ""
-
-#: .\la_mamadura\training\models.py:182
-msgid "Training Session"
-msgstr ""
+msgstr "Carga"
 
 #: .\la_mamadura\users\admin.py:24
 msgid "Personal info"
-msgstr ""
+msgstr "Información Personal"
 
 #: .\la_mamadura\users\admin.py:26
 msgid "Permissions"
-msgstr ""
+msgstr "Permisos"
 
 #: .\la_mamadura\users\admin.py:37
 msgid "Important dates"
-msgstr ""
+msgstr "Fechas importantes"
 
 #: .\la_mamadura\users\apps.py:9
 msgid "Users"
-msgstr ""
+msgstr "Usuarios"
 
 #: .\la_mamadura\users\forms.py:33 .\la_mamadura\users\tests\test_forms.py:35
 msgid "This email has already been taken."
-msgstr ""
+msgstr "Este email ya está en uso"
 
 #: .\la_mamadura\users\forms.py:55
 msgid "Remember Me"
-msgstr ""
+msgstr "Recordarme"
 
 #: .\la_mamadura\users\forms.py:64
 msgid "Email address"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: .\la_mamadura\users\forms.py:68
 msgid "Email"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: .\la_mamadura\users\forms.py:78
 msgid "Forgot your password?"
-msgstr ""
+msgstr "¿Has olvidado tu contraseña?"
 
 #: .\la_mamadura\users\models.py:20
 msgid "Name of User"
-msgstr ""
+msgstr "Nombre de usuario"
 
 #: .\la_mamadura\users\models.py:23
 msgid "email address"
-msgstr ""
+msgstr "correo electrónico"
 
 #: .\la_mamadura\users\tests\test_views.py:72 .\la_mamadura\users\views.py:25
 msgid "Information successfully updated"
-msgstr ""
+msgstr "Información actualizada exitosamente."
