@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-23 13:52+0100\n"
+"POT-Creation-Date: 2025-03-23 17:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,37 +21,47 @@ msgstr ""
 
 #: .\config\settings\base.py:33
 msgid "English"
-msgstr ""
+msgstr "Inglés"
 
 #: .\config\settings\base.py:34
 msgid "Spanish"
-msgstr ""
+msgstr "Español"
 
 #: .\la_mamadura\templates\allauth\layouts\entrance.html:8
-#: .\la_mamadura\templates\base.html:96
+#: .\la_mamadura\templates\base.html:100
 msgid "Sign In"
 msgstr "Entrar"
 
 #: .\la_mamadura\templates\base.html:77
 msgid "My Trainings"
-msgstr "Mis Entrenamientos"
+msgstr "Mis entrenamientos"
 
 #: .\la_mamadura\templates\base.html:81
 #: .\la_mamadura\templates\training\exercises_list.html:7
+#: .\la_mamadura\templates\training\training_template_update_form.html:23
 msgid "Exercises"
 msgstr "Ejercicios"
 
 #: .\la_mamadura\templates\base.html:85
+#: .\la_mamadura\templates\training\templates.html:7
+msgid "Templates"
+msgstr "Plantillas"
+
+#: .\la_mamadura\templates\base.html:89
 msgid "Sign Out"
 msgstr "Salir"
 
-#: .\la_mamadura\templates\base.html:91
+#: .\la_mamadura\templates\base.html:95
 msgid "Sign Up"
 msgstr "Registrarse"
 
 #: .\la_mamadura\templates\pages\home.html:12
 msgid "WHO WANTS TO BECOME"
 msgstr "¿Quién quiere devenir"
+
+#: .\la_mamadura\templates\training\create_training_from_template.html:9
+msgid "CREATE TRAINING SESSION FROM TEMPLATE"
+msgstr "CREAR SESIÓN DE ENTRENAMIENTO DESDE PLANTILLA"
 
 #: .\la_mamadura\templates\training\exercise_create_form.html:9
 #: .\la_mamadura\templates\training\exercise_record_form.html:9
@@ -63,17 +73,31 @@ msgid "TRAINING"
 msgstr "ENTRENAMIENTO"
 
 #: .\la_mamadura\templates\training\exercise_record_from_training_form.html:14
-#: .\la_mamadura\templates\training\sessions_records.html:15
+#: .\la_mamadura\templates\training\sessions_records.html:16
 msgid "Exercices"
 msgstr "Ejercicios"
 
 #: .\la_mamadura\templates\training\exercise_records.html:7
 msgid "Choose another exercise"
-msgstr "Elige otro ejercicio"
+msgstr "Elegir otro ejercicio"
 
 #: .\la_mamadura\templates\training\exercise_records.html:14
 msgid "progress chart"
 msgstr "gráfica de progreso"
+
+#: .\la_mamadura\templates\training\exercise_template_create_form.html:9
+msgid "CREATE EXERCISE TEMPLATE"
+msgstr "CREAR PLANTILLA DE EJERCICIO"
+
+#: .\la_mamadura\templates\training\exercise_template_list.html:7
+#: .\la_mamadura\templates\training\templates.html:9
+msgid "Exercise Templates"
+msgstr "Plantillas de ejercicios"
+
+#: .\la_mamadura\templates\training\exercise_template_list.html:8
+#: .\la_mamadura\templates\training\training_template_list.html:8
+msgid "Add template"
+msgstr "Agregar plantilla"
 
 #: .\la_mamadura\templates\training\exercise_update_form.html:9
 msgid "MODIFY EXERCISE"
@@ -83,25 +107,54 @@ msgstr "MODIFICAR EJERCICIO"
 msgid "Add new exercise"
 msgstr "Agregar nuevo ejercicio"
 
+#: .\la_mamadura\templates\training\exercises_list.html:8
+#: .\la_mamadura\templates\training\training_template_update_form.html:31
+msgid "Add exercise"
+msgstr "Agregar ejercicio"
+
 #: .\la_mamadura\templates\training\session_record_form.html:8
 msgid "REGISTER TRAINING"
 msgstr "REGISTRAR ENTRENAMIENTO"
 
 #: .\la_mamadura\templates\training\sessions_records.html:6
 msgid "Trainings"
-msgstr "Entrenamientos"
+msgstr "Entrnamientos"
 
 #: .\la_mamadura\templates\training\sessions_records.html:7
 msgid "Add training"
-msgstr "Agregar entrenamiento"
+msgstr "Nuevo entrenamiento"
+
+#: .\la_mamadura\templates\training\sessions_records.html:8
+msgid "Add training from template"
+msgstr "Agregar entrenamiento desde plantilla"
+
+#: .\la_mamadura\templates\training\templates.html:8
+msgid "Training Session Templates"
+msgstr "Plantillas de Sesiones de Entrenamiento"
+
+#: .\la_mamadura\templates\training\training_template_create_form.html:9
+msgid "CREATE TRAINING SESSION TEMPLATE"
+msgstr "CREAR PLANTILLA DE SESIÓN DE ENTRENAMIENTO"
+
+#: .\la_mamadura\templates\training\training_template_list.html:7
+msgid "Training Templates"
+msgstr "Plantillas de entrenamiento"
+
+#: .\la_mamadura\templates\training\training_template_update_form.html:9
+msgid "MODIFY TRAINING SESSION TEMPLATE"
+msgstr "MODIFICAR PLANTILLA DE SESIÓN DE ENTRENAMIENTO"
 
 #: .\la_mamadura\training\apps.py:9
 msgid "Training"
 msgstr "Entrenamiento"
 
+#: .\la_mamadura\training\forms.py:71
+msgid "Choose a Template"
+msgstr "Elegir una plantilla"
+
 #: .\la_mamadura\training\models.py:15 .\la_mamadura\training\models.py:32
 #: .\la_mamadura\training\models.py:54 .\la_mamadura\training\models.py:81
-#: .\la_mamadura\training\models.py:118
+#: .\la_mamadura\training\models.py:171
 msgid "Name"
 msgstr "Nombre"
 
@@ -120,31 +173,63 @@ msgstr "Descripción"
 
 #: .\la_mamadura\training\models.py:104
 msgid "Image URL"
-msgstr "URL de la imagen"
+msgstr "URL de Gmagen"
 
-#: .\la_mamadura\training\models.py:149 .\la_mamadura\training\models.py:166
+#: .\la_mamadura\training\models.py:120 .\la_mamadura\training\models.py:137
 msgid "User"
 msgstr "Usuario"
 
-#: .\la_mamadura\training\models.py:153 .\la_mamadura\training\models.py:170
+#: .\la_mamadura\training\models.py:124 .\la_mamadura\training\models.py:141
 msgid "Date"
 msgstr "Fecha"
 
-#: .\la_mamadura\training\models.py:173
+#: .\la_mamadura\training\models.py:144 .\la_mamadura\training\models.py:197
 msgid "Exercise"
 msgstr "Ejercicio"
 
-#: .\la_mamadura\training\models.py:177
+#: .\la_mamadura\training\models.py:148
 msgid "Repetitions"
 msgstr "Repeticiones"
 
-#: .\la_mamadura\training\models.py:178
+#: .\la_mamadura\training\models.py:149
 msgid "Load"
 msgstr "Carga"
 
+#: .\la_mamadura\training\models.py:153
+msgid "Training Session"
+msgstr "Sesión de entrenamiento"
+
+#: .\la_mamadura\training\models.py:196
+msgid "Training Session template"
+msgstr "Plantilla de sesión de entrenamiento"
+
+#: .\la_mamadura\training\models.py:198
+msgid "Sets"
+msgstr "Sets"
+
+#: .\la_mamadura\training\views.py:190
+msgid "Exercise created successfully!"
+msgstr "¡Ejercicio creado con éxito!"
+
+#: .\la_mamadura\training\views.py:204 .\la_mamadura\training\views.py:239
+msgid "Exercise Template created succesfully!"
+msgstr "¡Plantilla de ejercicio creada con éxito!"
+
+#: .\la_mamadura\training\views.py:219
+msgid "Exercise Template updated succesfully!"
+msgstr "¡Plantilla de entrenamiento creada con éxito!"
+
+#: .\la_mamadura\training\views.py:255
+msgid "Training Session Template updated succesfully!"
+msgstr "¡Plantilla de sesión de entrenamiento modificada con éxito!"
+
+#: .\la_mamadura\training\views.py:307
+msgid "Training Session created succesfully!"
+msgstr "¡Sesión de entrenamiento creada con éxito!"
+
 #: .\la_mamadura\users\admin.py:24
 msgid "Personal info"
-msgstr "Información Personal"
+msgstr "Información personal"
 
 #: .\la_mamadura\users\admin.py:26
 msgid "Permissions"
@@ -168,7 +253,7 @@ msgstr "Recordarme"
 
 #: .\la_mamadura\users\forms.py:64
 msgid "Email address"
-msgstr "Correo electrónico"
+msgstr "Dirección de correo electrónico"
 
 #: .\la_mamadura\users\forms.py:68
 msgid "Email"
@@ -176,7 +261,7 @@ msgstr "Correo electrónico"
 
 #: .\la_mamadura\users\forms.py:78
 msgid "Forgot your password?"
-msgstr "¿Has olvidado tu contraseña?"
+msgstr "¿Has olvidad tu contraseña, monguer?"
 
 #: .\la_mamadura\users\models.py:20
 msgid "Name of User"
@@ -184,8 +269,8 @@ msgstr "Nombre de usuario"
 
 #: .\la_mamadura\users\models.py:23
 msgid "email address"
-msgstr "correo electrónico"
+msgstr "Dirección de correo electrónico"
 
 #: .\la_mamadura\users\tests\test_views.py:72 .\la_mamadura\users\views.py:25
 msgid "Information successfully updated"
-msgstr "Información actualizada exitosamente."
+msgstr "¡Información actualizada correctamente!"
