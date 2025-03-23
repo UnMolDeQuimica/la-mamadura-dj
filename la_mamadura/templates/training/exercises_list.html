@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 
 
-<h1>🤾‍♀️ Exercises 🤾‍♀️</h1>
+<h1>🤾‍♀️ {% trans "Exercises" %} 🤾‍♀️</h1>
 <a href="{% url 'training:exercise_create' %}"><button class="btn btn-dark" style="margin: 25px;">Add exercise</button></a>
 <div>
     {% for entry in entries %}
@@ -16,7 +17,6 @@
         {% endif %}
 
         <div class="card-text">
-            fdsfd
             {{ entry.explanation }}
         </div>
     </div>

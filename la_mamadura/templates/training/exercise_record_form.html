@@ -1,11 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load i18n %}
 
 {% block content %}
 
     <div class="row">
-        <h1>REGISTER EXERCISE</h1>
+        <h1>{% trans "REGISTER EXERCISE" %}</h1>
     </div>
     
     <div class="mx-auto" style="width: 20rem;">
@@ -15,7 +16,7 @@
             
             {{ form|crispy }}
 
-            <input type="submit" class="btn btn-dark" value="Submit"></input>
+            <input type="submit" class="btn btn-dark" value="Submit">
         </form>
     </div>
 
