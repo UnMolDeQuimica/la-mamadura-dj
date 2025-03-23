@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+
+<h1>📁 {% trans "Templates" %} 📁</h1>
+<a href="{% url 'training:training_session_templates_list' %}"><h2>🏋️ {% trans "Training Session Templates" %} 🏋️</h2></a>
+<a href="{% url 'training:exercise_templates_list' %}"><h2>🤾‍♀️ {% trans "Exercise Templates" %} 🤾‍♀️</h2></a>
+
+{% endblock content %}

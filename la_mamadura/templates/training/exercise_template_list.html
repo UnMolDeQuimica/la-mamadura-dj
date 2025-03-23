@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+
+<h1>📁 {% trans "Exercise Templates" %} 📁</h1>
+<a href="{% url 'training:exercise_templates_create' %}"><button class="btn btn-dark" style="margin: 25px;">{% trans "Add template" %}</button></a>
+<div>
+    {% for template in exercise_templates %}
+    <div class="card mx-auto" style="width: 375px; margin-bottom: 25px;" >
+        <div class="card-title">
+            <h2><a href="{% url 'training:exercise_templates_update' pk=template.pk %}" style="color: #fb3f00; text-decoration: none;">🚴{{ template }} 🏃</a></h2>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock content %}

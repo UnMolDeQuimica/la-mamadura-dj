@@ -7,15 +7,24 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.views.generic import UpdateView
+from django.views.generic import TemplateView
+from django.views.generic import FormView
+from django.utils.translation import gettext_lazy as _
+from django.db.models import Q
 
 from la_mamadura.training.forms import CreateExcerciseRecordForm
 from la_mamadura.training.forms import CreateExcerciseRecordFromTrainingForm
 from la_mamadura.training.forms import CreateExerciseForm
 from la_mamadura.training.forms import CreateTrainingRecordForm
 from la_mamadura.training.forms import UpdateExerciseRecord
+from la_mamadura.training.forms import CreateExerciseTemplateForm
+from la_mamadura.training.forms import CreateTrainingSessionTemplateForm
+from la_mamadura.training.forms import CreateTrainingFromTemplateForm
 from la_mamadura.training.models import Exercise
 from la_mamadura.training.models import ExerciseRecord
 from la_mamadura.training.models import TrainingSessionRecord
+from la_mamadura.training.models import ExerciseTemplate
+from la_mamadura.training.models import TrainingSessionTemplate
 
 
 class CreateTrainingSessionRecord(LoginRequiredMixin, CreateView):
@@ -178,9 +187,123 @@ class CreateExerciseView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        messages.success(self.request, message="Exercise created successfully!")
+        messages.success(self.request, message=_("Exercise created successfully!"))
 
         return response
 
     def get_success_url(self):
         return reverse("training:exercises_update", kwargs={"pk": self.object.pk})
+
+
+class CreateExerciseTemplate(LoginRequiredMixin, CreateView):
+    form_class = CreateExerciseTemplateForm
+    template_name = "training/exercise_template_create_form.html"
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, message=_("Exercise Template created succesfully!"))
+        
+        return response
+    
+    def get_success_url(self):
+        return reverse("training:training_session_templates_update", kwargs={"pk": self.object.template.pk})
+
+
+class UpdateExerciseTemplate(LoginRequiredMixin, UpdateView):
+    form_class = CreateExerciseTemplateForm
+    template_name = "training/exercise_template_create_form.html"
+    model = ExerciseTemplate
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, message=_("Exercise Template updated succesfully!"))
+        
+        return response
+    
+    def get_success_url(self):
+        return reverse("training:exercise_templates_update", kwargs={"pk": self.object.pk})
+
+class ListExerciseTemplate(LoginRequiredMixin, ListView):
+    template_name = "training/exercise_template_list.html"
+    model = ExerciseTemplate
+    context_object_name = "exercise_templates"
+
+
+class CreateTrainingSessionTemplate(LoginRequiredMixin, CreateView):
+    form_class = CreateTrainingSessionTemplateForm
+    template_name = "training/training_template_create_form.html"
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        response = super().form_valid(form)
+        messages.success(self.request, message=_("Exercise Template created succesfully!"))
+        
+        return response
+    
+    def get_success_url(self):
+        return reverse("training:training_session_templates_update", kwargs={"pk": self.object.pk})
+
+
+class UpdateTrainingSessionTemplate(LoginRequiredMixin, UpdateView):
+    form_class = CreateTrainingSessionTemplateForm
+    template_name = "training/training_template_update_form.html"
+    model = TrainingSessionTemplate
+    context_object_name = "training_template"
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, message=_("Training Session Template updated succesfully!"))
+        
+        return response
+    
+    def get_success_url(self):
+        return reverse("training:training_session_templates_update", kwargs={"pk": self.object.pk})
+
+
+class ListTrainingSessionTemplate(LoginRequiredMixin, ListView):
+    template_name = "training/training_template_list.html"
+    model = TrainingSessionTemplate
+    context_object_name = "training_templates"
+    
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(Q(user__isnull=True) | Q(user__id=self.request.user.id))
+
+
+class TemplatesView(LoginRequiredMixin, TemplateView):
+    template_name = "training/templates.html"
+    
+
+class CreateTrainingRecordFromTemplate(LoginRequiredMixin, FormView):
+    template_name = "training/create_training_from_template.html"
+
+    def create_training_from_template(self):
+        training_session = TrainingSessionRecord.objects.create(user=self.request.user)
+        
+        return training_session
+    
+    def create_exercise_records_from_template(self, template: TrainingSessionTemplate, training_session: TrainingSessionRecord):
+        for exercise in template.exercise_template.all():
+            for i in range(exercise.sets):
+                ExerciseRecord.objects.create(
+                    user=training_session.user,
+                    exercise=exercise.exercise,
+                    repetitions=0,
+                    load=0,
+                    training_session=training_session
+                )
+        
+    def get_form(self):
+        return CreateTrainingFromTemplateForm(user=self.request.user, **self.get_form_kwargs())
+    
+    def get_success_url(self):
+        return reverse("training:training_records_create_exercise", kwargs={"id": self.training_session_id},)
+
+    def form_valid(self, form):
+        template = form.cleaned_data.get("template")
+        training_session = self.create_training_from_template()
+        self.create_exercise_records_from_template(template=template, training_session=training_session)
+        self.training_session_id = training_session.id
+        messages.success(self.request, message=_("Training Session created succesfully!"))
+
+        return super().form_valid(form)

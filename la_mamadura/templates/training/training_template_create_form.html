@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="row">
+        <h1>{% trans "CREATE TRAINING SESSION TEMPLATE" %}</h1>
+    </div>
+    
+    <div class="mx-auto" style="width: 20rem;">
+        <form method="post" class="my-class">
+            
+            {% csrf_token %}
+            
+            {{ form|crispy }}
+
+            <input type="submit" class="btn btn-dark" value="Submit">
+        </form>
+    </div>
+{% endblock content %}
