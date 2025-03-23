@@ -154,6 +154,8 @@ class ExerciseRecord(models.Model):
         on_delete=models.CASCADE,
         related_name="exercise_record",
     )
+    
+    notes = models.TextField(verbose_name=_("Notes"), blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.exercise} - {self.date}: {self.load} {self.exercise.load_units} x {self.repetitions}"  # noqa: E501
@@ -183,6 +185,8 @@ class TrainingSessionTemplate(models.Model):
         blank=True,
         null=True
     )
+    notes = models.TextField(verbose_name=_("Notes"), blank=True, null=True)
+    
 
     def __str__(self) -> str:
         return self.name

@@ -3,7 +3,7 @@
 {% block content %}
 
   <div>
-    <select style="width: 300px;" class="mx-auto form-select"  onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+    <select style="width: 300px; margin: 30px;" class="mx-auto form-select"  onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
       <option value="" selected disabled hidden>{% trans "Choose another exercise" %}</option>
       {% for ex in exercises %}
       <option value="{% url 'training:exercise_record_graph' id=ex.id %}">{{ ex.name }}</option>

@@ -274,3 +274,7 @@ msgstr "Dirección de correo electrónico"
 #: .\la_mamadura\users\tests\test_views.py:72 .\la_mamadura\users\views.py:25
 msgid "Information successfully updated"
 msgstr "¡Información actualizada correctamente!"
+
+#: la_mamadura/training/models.py:158 la_mamadura/training/models.py:188
+msgid "Notes"
+msgstr "Notas"
