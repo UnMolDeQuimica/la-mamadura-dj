@@ -5,7 +5,7 @@
 
 
 <h1>🤾‍♀️ {% trans "Exercises" %} 🤾‍♀️</h1>
-<a href="{% url 'training:exercise_create' %}"><button class="btn btn-dark" style="margin: 25px;">Add exercise</button></a>
+<a href="{% url 'training:exercise_create' %}"><button class="btn btn-dark" style="margin: 25px;">{% trans "Add exercise" %}</button></a>
 <div>
     {% for entry in entries %}
     <div class="card mx-auto" style="width: 375px; margin-bottom: 25px;" >

@@ -5,6 +5,7 @@
 
 <h1>💪 {% trans "Trainings" %} 💪</h1>
 <a href="{% url 'training:training_records_create' %}"><button class="btn btn-dark" style="margin: 25px;">{% trans 'Add training' %}</button></a>
+<a href="{% url 'training:training_from_template' %}"><button class="btn btn-dark" style="margin: 25px;">{% trans 'Add training from template' %}</button></a>
 <div>
     {% for entry in entries %}
     <div class="card mx-auto" style="width: 375px; margin-bottom: 25px;" >
