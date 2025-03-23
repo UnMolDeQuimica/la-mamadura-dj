@@ -109,35 +109,6 @@ class Exercise(models.Model):
     class Meta:
         ordering = ["name",]
 
-class TrainingSession(models.Model):
-    """
-    Defines a training sessions with predefined exercises.
-    """
-
-    name = models.CharField(
-        verbose_name=_("Name"),
-        max_length=255,
-        blank=False,
-        unique=True,
-    )
-
-    excercices = models.ManyToManyField(Exercise, related_name="training_session")
-
-    def __str__(self) -> str:
-        return self.name
-
-
-class CustomTrainingSession(TrainingSession):
-    """
-    Training Session with the exercises selected by the user.
-    """
-
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="custom_training_session",
-    )
-
 
 class TrainingSessionRecord(models.Model):
     """
@@ -189,3 +160,45 @@ class ExerciseRecord(models.Model):
 
     class Meta:
         ordering = ["exercise__name", "date"]
+
+
+class TrainingSessionTemplate(models.Model):
+    """
+    Defines a training sessions with predefined exercises.
+    """
+
+    name = models.CharField(
+        verbose_name=_("Name"),
+        max_length=255,
+        blank=False,
+        unique=True,
+    )
+
+    exercises = models.ManyToManyField(Exercise, related_name="training_session_template", through="ExerciseTemplate")
+    
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="training_session_template",
+        blank=True,
+        null=True
+    )
+
+    def __str__(self) -> str:
+        return self.name
+    
+    class Meta:
+        ordering = ["name"]
+
+
+
+class ExerciseTemplate(models.Model):
+    template = models.ForeignKey(TrainingSessionTemplate, on_delete=models.CASCADE, verbose_name=_("Training Session template"), related_name="exercise_template")
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, verbose_name=_("Exercise"), related_name="exercise_template")
+    sets = models.PositiveIntegerField(default=0, blank=True, verbose_name=_("Sets"))
+
+    def __str__(self):
+        return f"{self.sets} x {self.exercise.name} - {self.template.name}"
+    
+    class Meta:
+        ordering = ["template__name"]
