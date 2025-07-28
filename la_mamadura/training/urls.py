@@ -12,7 +12,7 @@ from .views import TrainingSessionsRecordsList
 from .views import CreateExerciseTemplate
 from .views import UpdateExerciseTemplate
 from .views import CreateTrainingSessionTemplate
-from .views import UpdateTrainingSessionTemplate
+from .views import UpdateTrainingSessionTemplate, GetOrCreateLatestTrainigRecord
 
 from . import views
 
@@ -101,7 +101,11 @@ urlpatterns = [
     path(
         "training-from-template/",
         view=views.CreateTrainingRecordFromTemplate.as_view(),
-        name="training_from_template"
-    )
+        name="training_from_template",
+    ),
+    path(
+        "last-training/",
+        view=views.GetOrCreateLatestTrainigRecord.as_view(),
+        name="get_last_training",
+    ),
 ]
-
