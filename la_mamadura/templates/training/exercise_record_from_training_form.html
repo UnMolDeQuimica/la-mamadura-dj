@@ -8,24 +8,55 @@
     <div class="row">
         <h1>{% trans "TRAINING" %} {{ training }}</h1>
     </div>
-    
-    <div class="card mx-auto" style="width: 375px; margin-bottom: 25px;" >
-        <div class="card-header">
-            🏋️ {% trans "Exercices" %} 🏋️
-        </div>
-        <ul class="list-group list-group-flush">
-            {% for exercise in training.exercise_record.all %}
-            <li class="list-group-item"><b> <a href="{% url 'training:exercise_record_graph' id=exercise.exercise.id %}" style="color: black; text-decoration: none;">{{ exercise.exercise.name }}</a></b>: <a href="{% url 'training:exercise_record_update' pk=exercise.pk %}" style="text-decoration: none;">{{ exercise.load }} {{ exercise.exercise.load_units }} x {{ exercise.repetitions }} reps</a></li>
-            {% endfor %}
-        </ul>
+
+<div class="card mx-auto" style="width: 375px; margin-bottom: 25px;">
+    <div class="card-header">
+        🏋️ {% trans "Exercises" %} 🏋️
     </div>
+    <div class="accordion accordion-flush" id="accordionExercises">
+        {% for exercise, exercise_data in exercises.items %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ exercise.id }}">
+                    <button class="accordion-button collapsed" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#ex{{ exercise.id }}"
+                            aria-expanded="false"
+                            aria-controls="{{ exercise.id }}">
+                        <a href="{% url 'training:exercise_record_graph' id=exercise.id %}"
+                           style="color: black; text-decoration: none; margin-left:auto;"
+                           onclick="event.stopPropagation();">
+                        <b>{{ exercise.name }} - {{ exercise_data.n_entries }} sets</b>
+                        </a>
+                    </button>
+                </h2>
+                <div id="ex{{ exercise.id }}"
+                     class="accordion-collapse collapse"
+                     aria-labelledby="heading{{ exercise.id }}"
+                     >
+                    <div class="accordion-body">
+                        <ul class="list-group list-group-flush">
+                            {% for exercise_record in exercise_data.entries %}
+                            <li class="list-group-item">
+                                <a href="{% url 'training:exercise_record_update' pk=exercise.pk %}"
+                                   style="text-decoration: none;">
+                                    {{ exercise_record.load }} {{ exercise.load_units }} x {{ exercise_record.repetitions }} reps
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 
     <h2>Register new exercise</h2>
     <div class="mx-auto" style="width: 20rem;">
         <form method="post" class="my-class">
-            
+
             {% csrf_token %}
-            
+
             {{ form|crispy }}
 
             <input type="submit" class="btn btn-dark" value="Submit"></input>
