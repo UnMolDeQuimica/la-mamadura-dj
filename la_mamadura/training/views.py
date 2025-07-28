@@ -1,16 +1,21 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
-from django.views.generic import ListView
-from django.views.generic import UpdateView
-from django.views.generic import TemplateView
-from django.views.generic import FormView
+from django.views.generic import (
+    CreateView,
+    ListView,
+    FormView,
+    UpdateView,
+    TemplateView,
+    View,
+)
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
+from django.utils import timezone
+from datetime import timedelta
 
 from la_mamadura.training.forms import CreateExcerciseRecordForm
 from la_mamadura.training.forms import CreateExcerciseRecordFromTrainingForm
@@ -351,3 +356,21 @@ class CreateTrainingRecordFromTemplate(LoginRequiredMixin, FormView):
         )
 
         return super().form_valid(form)
+
+
+class GetOrCreateLatestTrainigRecord(LoginRequiredMixin, View):
+    def get(self, request):
+        user = request.user
+        today = timezone.localdate()
+        yesterday = today - timedelta(days=1)
+        qs = (
+            TrainingSessionRecord.objects.filter(date__in=[today, yesterday])
+            .order_by("date")
+            .last()
+        )
+        if not qs:
+            qs = TrainingSessionRecord.objects.create(user=user)
+
+        return redirect(
+            reverse("training:training_records_create_exercise", kwargs={"id": qs.id}),
+        )
