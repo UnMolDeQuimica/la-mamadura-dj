@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Max
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
@@ -160,11 +161,13 @@ class ExerciseRecordsGraph(LoginRequiredMixin, ListView):
         ).order_by("date")
 
     def get_context_data(self, *, object_list=..., **kwargs):
+        qs = self.get_queryset()
         context = super().get_context_data(object_list=object_list, **kwargs)
         context["exercise"] = self.exercise.name
-        context["entries"] = self.get_queryset()
+        context["entries"] = qs
         context["units"] = self.exercise.load_units
         context["exercises"] = Exercise.objects.all()
+        context["pr"] = qs.aggregate(Max("load")).get("load__max") if qs.exists() else 0
 
         return context
 
