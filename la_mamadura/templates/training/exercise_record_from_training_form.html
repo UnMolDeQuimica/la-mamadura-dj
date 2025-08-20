@@ -25,7 +25,16 @@
                         <a href="{% url 'training:exercise_record_graph' id=exercise.id %}"
                            style="color: black; text-decoration: none; margin-left:auto;"
                            onclick="event.stopPropagation();">
-                        <b>{{ exercise.name }} - {{ exercise_data.n_entries }} sets</b>
+                        <b>{{ exercise.name }} - {{ exercise_data.n_entries }} sets
+
+                            {% if exercise_data.status == "started" %}
+                            🟠
+                            {% elif exercise_data.status == "finished" %}
+                            🟢
+                            {% elif exercise_data.status == "pending" %}
+                            🔴
+                            {% endif %}
+                        </b>
                         </a>
                     </button>
                 </h2>
