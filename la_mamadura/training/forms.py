@@ -11,6 +11,7 @@ from la_mamadura.training.models import ExerciseRecord
 from la_mamadura.training.models import TrainingSessionRecord
 from la_mamadura.training.models import ExerciseTemplate
 from la_mamadura.training.models import TrainingSessionTemplate
+from la_mamadura.training.models import Weight
 
 
 class CreateTrainingRecordForm(ModelForm):
@@ -79,3 +80,12 @@ class CreateTrainingFromTemplateForm(Form):
             self.fields["template"].queryset = TrainingSessionTemplate.objects.filter(
                 Q(user__isnull=True) | Q(user__id=user.id)
             )
+
+
+class CreateWeightRecordForm(ModelForm):
+    class Meta:
+        model = Weight
+        exclude = ["user"]
+        widgets = {
+            "date": TextInput(attrs={"type": "date"}),
+        }
