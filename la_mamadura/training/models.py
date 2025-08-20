@@ -221,7 +221,7 @@ class ExerciseTemplate(models.Model):
 
 
 class Weight(models.Model):
-    weight = models.SmallIntegerField(
+    weight = models.FloatField(
         verbose_name=_("Weight"), default=0, blank=True, null=True
     )
     user = models.ForeignKey(
