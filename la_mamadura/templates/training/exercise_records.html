@@ -20,13 +20,10 @@
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.2.0/dist/chartjs-plugin-zoom.min.js"></script>
   
   <script>
     const ctx = document.getElementById('myChart');
-    {% for entry in entries%}
-    console.log("{{entry.id}}")
-  {% endfor %}
     var config = {
         data: {
           datasets: [
@@ -52,7 +49,8 @@
                 {
                   x: "{{ entry.date|date:'d-m-Y' }}",
                   y: parseFloat("{{ entry.load }}"),
-                  r: "{{ entry.repetitions }}"
+                  r: "{{ entry.repetitions }}",
+                  id: "{{ entry.id }}"
                 },
               {% endfor %}
             ]
@@ -87,11 +85,32 @@
                 parser: 'dd-MM-yyyy',
                 unit: "day",
                 unitStepSize: 1,
-              }
+              },
+              min: "{{ entries.first }}",
+              max: "{{ entries.last }}"
             }
+          },
+          plugins: {
+            zoom: {
+              pan: {
+                  enabled: true,
+                  mode: 'x',        // horizontal only
+                  modifierKey: null
+              },
+              zoom: {
+                  wheel: {
+                      enabled: true,
+                      mode: 'x',    // horizontal zoom only
+                  },
+                  pinch: {
+                      enabled: true,
+                      mode: 'x',
+                  }
+              }
           }
         }
       }
+    }
     new Chart(ctx, config);
   </script>
 
