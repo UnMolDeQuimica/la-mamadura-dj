@@ -206,3 +206,16 @@ class ExerciseTemplate(models.Model):
     
     class Meta:
         ordering = ["template__name"]
+
+
+class Weight(models.Model):
+    weight = models.SmallIntegerField(verbose_name=_("Weight"), default=0, blank=True, null=True)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name=_("User"), related_name="weight")
+    date = models.DateField(verbose_name=_("Date"), default=now, blank=True)
+    
+    def __str__(self):
+        return f"{self.weight} kg"
+    
+    class Meta:
+        ordering = ["date"]
+
