@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+<div>
+  <h1>{% trans "Weight Chart" %}</h1>
+</div>
+<div class="mx-auto" style="width: 95%; max-height: 50%; min-height: 500px">
+  <canvas id="myChart"></canvas>
+</div>
+<div>
+  <a href="create/"><button class="btn btn-dark">{% trans "Create new entry" %}</button></a>
+</div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+    var config = {
+        data: {
+          datasets: [
+          {
+            type: "line",
+            label: "KG",
+            data: [
+              {% for entry in entries%}
+                {
+                  x: "{{ entry.date }}",
+                  y: parseFloat("{{ entry.weight }}"),
+                },
+              {% endfor %}
+            ]
+          },
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            },
+            x: {
+              ticks: {
+                maxRotation: 90,
+                minRotation: 90,
+              }
+            }
+          }
+        }
+      }
+    new Chart(ctx, config);
+  </script>
+
+{% endblock content %}
