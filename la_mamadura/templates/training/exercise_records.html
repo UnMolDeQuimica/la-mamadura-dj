@@ -13,11 +13,14 @@
   <div>
     <h1>{{ exercise }} {% trans "progress chart" %}</h1>
   </div>
-  <div class="mx-auto" style="width: 80%; height: 50%;">
+  <h2>{% trans "Your PR: " %} {{ pr }} {{ units }}</h2>
+  <div class="mx-auto" style="width: 85%; max-height: 70%; min-height: 500px">
     <canvas id="myChart"></canvas>
   </div>
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
   
   <script>
     const ctx = document.getElementById('myChart');
@@ -30,7 +33,7 @@
             data: [
               {% for entry in entries%}
                 {
-                  x: "{{ entry.date }}",
+                  x: "{{ entry.date|date:'d-m-Y' }}",
                   y: parseFloat("{{ entry.load }}"),
                   reps: "{{ entry.repetitions }}"
                 },
@@ -43,7 +46,7 @@
             data: [
               {% for entry in entries%}
                 {
-                  x: "{{ entry.date }}",
+                  x: "{{ entry.date|date:'d-m-Y' }}",
                   y: parseFloat("{{ entry.load }}"),
                   r: "{{ entry.repetitions }}"
                 },
@@ -51,6 +54,29 @@
             ]
           },
           ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true
+            },
+            x: {
+              ticks: {
+                maxRotation: 90,
+                minRotation: 90,
+                autoSkip: true,
+                maxTicksLimit: 5
+              },
+              type: "time",
+              time: {
+                parser: 'dd-mm-yyyy',
+                unit: "day",
+                unitStepSize: 1,
+              }
+            }
+          }
         }
       }
     new Chart(ctx, config);

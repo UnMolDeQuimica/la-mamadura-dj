@@ -13,9 +13,13 @@
 </div>
   
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
   
   <script>
     const ctx = document.getElementById('myChart');
+    {% for entry in entries%}
+    console.log("{{ entry.date|date:'d-m-Y'  }}")
+  {% endfor %}
     var config = {
         data: {
           datasets: [
@@ -25,7 +29,7 @@
             data: [
               {% for entry in entries%}
                 {
-                  x: "{{ entry.date }}",
+                  x: "{{ entry.date|date:'d-m-Y' }}",
                   y: parseFloat("{{ entry.weight }}"),
                 },
               {% endfor %}
@@ -44,6 +48,14 @@
               ticks: {
                 maxRotation: 90,
                 minRotation: 90,
+                autoSkip: true,
+                maxTicksLimit: 5
+              },
+              type: "time",
+              time: {
+                parser: 'dd-mm-yyyy',
+                unit: "day",
+                unitStepSize: 1,
               }
             }
           }
