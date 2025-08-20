@@ -428,3 +428,23 @@ class CreateWeightRecord(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse("training:weight_record_graph")
+
+
+class UpdateWeightRecord(LoginRequiredMixin, UpdateView):
+    form_class = CreateWeightRecordForm
+    template_name = "training/create_weight_record_form.html"
+    model = Weight
+    
+    def get(self, request, *args, **kwargs):
+        print(self)
+        return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        response = super().form_valid(form)
+        messages.success(self.request, message=_("Weight record created succesfully!"))
+
+        return response
+
+    def get_success_url(self):
+        return reverse("training:weight_record_graph")

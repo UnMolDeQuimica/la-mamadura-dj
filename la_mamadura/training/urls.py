@@ -118,4 +118,9 @@ urlpatterns = [
         view=views.WeightRecordGraph.as_view(),
         name="weight_record_graph",
     ),
+    path(
+        "weight/<int:pk>/",
+        view=views.UpdateWeightRecord.as_view(),
+        name="weight_record_update",
+    ),
 ]
