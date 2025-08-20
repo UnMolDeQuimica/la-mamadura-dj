@@ -148,7 +148,7 @@ class ExerciseRecord(models.Model):
         related_name="exercise_record",
     )
     repetitions = models.PositiveIntegerField(verbose_name=_("Repetitions"))
-    load = models.IntegerField(verbose_name=_("Load"))
+    load = models.FloatField(verbose_name=_("Load"))
 
     training_session = models.ForeignKey(
         TrainingSessionRecord,

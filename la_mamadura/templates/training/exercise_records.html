@@ -31,7 +31,7 @@
               {% for entry in entries%}
                 {
                   x: "{{ entry.date }}",
-                  y: "{{ entry.load }}",
+                  y: parseFloat("{{ entry.load }}"),
                   reps: "{{ entry.repetitions }}"
                 },
               {% endfor %}
@@ -44,7 +44,7 @@
               {% for entry in entries%}
                 {
                   x: "{{ entry.date }}",
-                  y: "{{ entry.load }}",
+                  y: parseFloat("{{ entry.load }}"),
                   r: "{{ entry.repetitions }}"
                 },
               {% endfor %}
