@@ -107,7 +107,9 @@ class Exercise(models.Model):
         return self.name
 
     class Meta:
-        ordering = ["name",]
+        ordering = [
+            "name",
+        ]
 
 
 class TrainingSessionRecord(models.Model):
@@ -154,7 +156,7 @@ class ExerciseRecord(models.Model):
         on_delete=models.CASCADE,
         related_name="exercise_record",
     )
-    
+
     notes = models.TextField(verbose_name=_("Notes"), blank=True, null=True)
 
     def __str__(self) -> str:
@@ -176,45 +178,59 @@ class TrainingSessionTemplate(models.Model):
         unique=True,
     )
 
-    exercises = models.ManyToManyField(Exercise, related_name="training_session_template", through="ExerciseTemplate")
-    
+    exercises = models.ManyToManyField(
+        Exercise, related_name="training_session_template", through="ExerciseTemplate"
+    )
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name="training_session_template",
         blank=True,
-        null=True
+        null=True,
     )
     notes = models.TextField(verbose_name=_("Notes"), blank=True, null=True)
-    
 
     def __str__(self) -> str:
         return self.name
-    
+
     class Meta:
         ordering = ["name"]
 
 
 class ExerciseTemplate(models.Model):
-    template = models.ForeignKey(TrainingSessionTemplate, on_delete=models.CASCADE, verbose_name=_("Training Session template"), related_name="exercise_template")
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, verbose_name=_("Exercise"), related_name="exercise_template")
+    template = models.ForeignKey(
+        TrainingSessionTemplate,
+        on_delete=models.CASCADE,
+        verbose_name=_("Training Session template"),
+        related_name="exercise_template",
+    )
+    exercise = models.ForeignKey(
+        Exercise,
+        on_delete=models.CASCADE,
+        verbose_name=_("Exercise"),
+        related_name="exercise_template",
+    )
     sets = models.PositiveIntegerField(default=0, blank=True, verbose_name=_("Sets"))
 
     def __str__(self):
         return f"{self.sets} x {self.exercise.name} - {self.template.name}"
-    
+
     class Meta:
         ordering = ["template__name"]
 
 
 class Weight(models.Model):
-    weight = models.SmallIntegerField(verbose_name=_("Weight"), default=0, blank=True, null=True)
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name=_("User"), related_name="weight")
+    weight = models.SmallIntegerField(
+        verbose_name=_("Weight"), default=0, blank=True, null=True
+    )
+    user = models.ForeignKey(
+        to=User, on_delete=models.CASCADE, verbose_name=_("User"), related_name="weight"
+    )
     date = models.DateField(verbose_name=_("Date"), default=now, blank=True)
-    
+
     def __str__(self):
         return f"{self.weight} kg"
-    
+
     class Meta:
         ordering = ["date"]
-

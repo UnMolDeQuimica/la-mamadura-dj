@@ -65,13 +65,17 @@ class CreateTrainingSessionTemplateForm(ModelForm):
     class Meta:
         model = TrainingSessionTemplate
         fields = ["name"]
-        
-        
+
+
 class CreateTrainingFromTemplateForm(Form):
-    template = ModelChoiceField(queryset=TrainingSessionTemplate.objects.all(), label=_("Choose a Template"))
-    
+    template = ModelChoiceField(
+        queryset=TrainingSessionTemplate.objects.all(), label=_("Choose a Template")
+    )
+
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
         if user:
-            self.fields["template"].queryset = TrainingSessionTemplate.objects.filter(Q(user__isnull=True) | Q(user__id=user.id))
+            self.fields["template"].queryset = TrainingSessionTemplate.objects.filter(
+                Q(user__isnull=True) | Q(user__id=user.id)
+            )

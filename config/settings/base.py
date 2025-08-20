@@ -29,11 +29,12 @@ TIME_ZONE = "UTC"
 LANGUAGE_CODE = "es"
 # https://docs.djangoproject.com/en/dev/ref/settings/#languages
 from django.utils.translation import gettext_lazy as _
+
 LANGUAGES = [
-    ('en', _('English')),
-    ('es', _('Spanish')),
-#     ('fr-fr', _('French')),
-#     ('pt-br', _('Portuguese')),
+    ("en", _("English")),
+    ("es", _("Spanish")),
+    #     ('fr-fr', _('French')),
+    #     ('pt-br', _('Portuguese')),
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
@@ -324,7 +325,7 @@ ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_LOGIN_METHODS = {"email"}
 # https://docs.allauth.org/en/latest/account/configuration.html
-ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_EMAIL_REQUIRED = True
 # https://docs.allauth.org/en/latest/account/configuration.html
@@ -334,7 +335,10 @@ ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_ADAPTER = "la_mamadura.users.adapters.AccountAdapter"
 # https://docs.allauth.org/en/latest/account/forms.html
-ACCOUNT_FORMS = {"signup": "la_mamadura.users.forms.UserSignupForm", "login": "la_mamadura.users.forms.CustomLoginForm"}
+ACCOUNT_FORMS = {
+    "signup": "la_mamadura.users.forms.UserSignupForm",
+    "login": "la_mamadura.users.forms.CustomLoginForm",
+}
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_ADAPTER = "la_mamadura.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
