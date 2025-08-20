@@ -118,5 +118,4 @@ urlpatterns = [
         view=views.WeightRecordGraph.as_view(),
         name="weight_record_graph",
     ),
-
 ]

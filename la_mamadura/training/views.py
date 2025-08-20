@@ -98,15 +98,15 @@ class CreateExerciseRecordFromTrainingSession(LoginRequiredMixin, CreateView):
             entries_values = []
             for entry in exercise["entries"]:
                 entries_values.append(entry.load * entry.repetitions)
-            
+
             if any(entries_values):
                 status = "started"
-            
+
             if all(entries_values):
                 status = "finished"
-            
+
             exercise["status"] = status
-                
+
         context["exercises"] = exercises
         return context
 
@@ -132,7 +132,7 @@ class CreateExcerciseRecord(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-    
+
     def get_success_url(self):
         return super().get_success_url()
 
@@ -350,7 +350,9 @@ class CreateTrainingRecordFromTemplate(LoginRequiredMixin, FormView):
                     training_session=training_session,
                 )
 
-    def get_form(self):    form_class = CreateTrainingSessionTemplateForm
+    def get_form(self):
+        form_class = CreateTrainingSessionTemplateForm
+
     template_name = "training/training_template_create_form.html"
 
     def form_valid(self, form):
@@ -417,13 +419,9 @@ class CreateWeightRecord(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         response = super().form_valid(form)
-        messages.success(
-            self.request, message=_("Weight record created succesfully!")
-        )
+        messages.success(self.request, message=_("Weight record created succesfully!"))
 
         return response
 
     def get_success_url(self):
-        return reverse(
-            "training:weight_record_graph"
-        )
+        return reverse("training:weight_record_graph")
