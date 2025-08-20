@@ -108,4 +108,15 @@ urlpatterns = [
         view=views.GetOrCreateLatestTrainigRecord.as_view(),
         name="get_last_training",
     ),
+    path(
+        "weight/create/",
+        view=views.CreateWeightRecord.as_view(),
+        name="create_weight_record",
+    ),
+    path(
+        "weight/",
+        view=views.WeightRecordGraph.as_view(),
+        name="weight_record_graph",
+    ),
+
 ]

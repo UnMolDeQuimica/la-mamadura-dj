@@ -24,12 +24,13 @@ from la_mamadura.training.forms import CreateTrainingRecordForm
 from la_mamadura.training.forms import UpdateExerciseRecord
 from la_mamadura.training.forms import CreateExerciseTemplateForm
 from la_mamadura.training.forms import CreateTrainingSessionTemplateForm
-from la_mamadura.training.forms import CreateTrainingFromTemplateForm
+from la_mamadura.training.forms import CreateWeightRecordForm
 from la_mamadura.training.models import Exercise
 from la_mamadura.training.models import ExerciseRecord
 from la_mamadura.training.models import TrainingSessionRecord
 from la_mamadura.training.models import ExerciseTemplate
 from la_mamadura.training.models import TrainingSessionTemplate
+from la_mamadura.training.models import Weight
 
 
 class CreateTrainingSessionRecord(LoginRequiredMixin, CreateView):
@@ -121,7 +122,7 @@ class CreateExcerciseRecord(LoginRequiredMixin, CreateView):
 
 
 class ExerciseRecordsGraph(LoginRequiredMixin, ListView):
-    template_name = "training/exercise_records.html"
+    template_name = "training/weight_records.html"
 
     def dispatch(self, request, *args, **kwargs):
         self.exercise = get_object_or_404(Exercise, id=kwargs.get("id"))
@@ -333,20 +334,22 @@ class CreateTrainingRecordFromTemplate(LoginRequiredMixin, FormView):
                     training_session=training_session,
                 )
 
-    def get_form(self):
-        return CreateTrainingFromTemplateForm(
-            user=self.request.user, **self.get_form_kwargs()
+    def get_form(self):    form_class = CreateTrainingSessionTemplateForm
+    template_name = "training/training_template_create_form.html"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        response = super().form_valid(form)
+        messages.success(
+            self.request, message=_("Exercise Template created succesfully!")
         )
+
+        return response
 
     def get_success_url(self):
         return reverse(
-            "training:training_records_create_exercise",
-            kwargs={"id": self.training_session_id},
+            "training:training_session_templates_update", kwargs={"pk": self.object.pk}
         )
-
-    def form_valid(self, form):
-        template = form.cleaned_data.get("template")
-        training_session = self.create_training_from_template()
         self.create_exercise_records_from_template(
             template=template, training_session=training_session
         )
@@ -373,4 +376,38 @@ class GetOrCreateLatestTrainigRecord(LoginRequiredMixin, View):
 
         return redirect(
             reverse("training:training_records_create_exercise", kwargs={"id": qs.id}),
+        )
+
+
+class WeightRecordGraph(LoginRequiredMixin, ListView):
+    template_name = "training/weight_records.html"
+
+    def get_queryset(self):
+        return Weight.objects.filter(
+            user__pk=self.request.user.pk,
+        ).order_by("date")
+
+    def get_context_data(self, *, object_list=..., **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        context["entries"] = self.get_queryset()
+
+        return context
+
+
+class CreateWeightRecord(LoginRequiredMixin, CreateView):
+    form_class = CreateWeightRecordForm
+    template_name = "training/create_weight_record_form.html"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        response = super().form_valid(form)
+        messages.success(
+            self.request, message=_("Weight record created succesfully!")
+        )
+
+        return response
+
+    def get_success_url(self):
+        return reverse(
+            "training:weight_record_graph"
         )
