@@ -195,7 +195,6 @@ class TrainingSessionTemplate(models.Model):
         ordering = ["name"]
 
 
-
 class ExerciseTemplate(models.Model):
     template = models.ForeignKey(TrainingSessionTemplate, on_delete=models.CASCADE, verbose_name=_("Training Session template"), related_name="exercise_template")
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, verbose_name=_("Exercise"), related_name="exercise_template")
