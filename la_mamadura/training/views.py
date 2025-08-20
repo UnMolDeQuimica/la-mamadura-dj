@@ -93,7 +93,20 @@ class CreateExerciseRecordFromTrainingSession(LoginRequiredMixin, CreateView):
                 exercises[exercise]["n_entries"] += 1
                 exercises[exercise]["entries"].append(exercise_record)
 
-        print(exercises)
+        for exercise in exercises.values():
+            status = "pending"
+            entries_values = []
+            for entry in exercise["entries"]:
+                entries_values.append(entry.load * entry.repetitions)
+            
+            if any(entries_values):
+                status = "started"
+            
+            if all(entries_values):
+                status = "finished"
+            
+            exercise["status"] = status
+                
         context["exercises"] = exercises
         return context
 
@@ -119,10 +132,13 @@ class CreateExcerciseRecord(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        return super().get_success_url()
 
 
 class ExerciseRecordsGraph(LoginRequiredMixin, ListView):
-    template_name = "training/weight_records.html"
+    template_name = "training/exercise_records.html"
 
     def dispatch(self, request, *args, **kwargs):
         self.exercise = get_object_or_404(Exercise, id=kwargs.get("id"))
@@ -166,8 +182,8 @@ class ExerciseRecordUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse(
-            "training:exercise_record_update",
-            kwargs={"pk": self.exercise_record.pk},
+            "training:training_records_create_exercise",
+            kwargs={"id": self.exercise_record.training_session.pk},
         )
 
 
