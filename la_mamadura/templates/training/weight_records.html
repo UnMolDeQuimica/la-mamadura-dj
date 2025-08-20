@@ -31,6 +31,7 @@
                 {
                   x: "{{ entry.date|date:'d-m-Y' }}",
                   y: parseFloat("{{ entry.weight }}"),
+                  id: "{{ entry.id }}"
                 },
               {% endfor %}
             ]
@@ -40,6 +41,15 @@
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          onClick: (event, elements, chart) => {
+            if (elements.length > 0) {
+              const point = elements[0];
+              const datasetIndex = point.datasetIndex;
+              const index = point.index;
+              const dataPoint = chart.data.datasets[datasetIndex].data[index];
+              window.location.href = `/training/weight/${dataPoint.id}/`;
+            }
+          },
           scales: {
             y: {
               beginAtZero: true
