@@ -10,7 +10,7 @@
       La Mamadura
     {% endblock title %}
   </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description"
         content="Fitness Tracker" />
   <meta name="author"
@@ -87,6 +87,10 @@
               <li class="nav-item"></li>
                 <a class="nav-link"
                    href="{% url 'training:templates' %}">{% translate "Templates" %}</a>
+              </li>
+              <li class="nav-item"></li>
+              <a class="nav-link"
+                 href="{% url 'training:weight_record_graph' %}">{% translate "Weight Tracker" %}</a>
               </li>
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}
