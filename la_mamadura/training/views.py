@@ -26,6 +26,7 @@ from la_mamadura.training.forms import UpdateExerciseRecord
 from la_mamadura.training.forms import CreateExerciseTemplateForm
 from la_mamadura.training.forms import CreateTrainingSessionTemplateForm
 from la_mamadura.training.forms import CreateWeightRecordForm
+from la_mamadura.training.forms import CreateTrainingFromTemplateForm
 from la_mamadura.training.models import Exercise
 from la_mamadura.training.models import ExerciseRecord
 from la_mamadura.training.models import TrainingSessionRecord
@@ -354,23 +355,19 @@ class CreateTrainingRecordFromTemplate(LoginRequiredMixin, FormView):
                 )
 
     def get_form(self):
-        form_class = CreateTrainingSessionTemplateForm
-
-    template_name = "training/training_template_create_form.html"
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        response = super().form_valid(form)
-        messages.success(
-            self.request, message=_("Exercise Template created succesfully!")
+        return CreateTrainingFromTemplateForm(
+            user=self.request.user, **self.get_form_kwargs()
         )
-
-        return response
 
     def get_success_url(self):
         return reverse(
-            "training:training_session_templates_update", kwargs={"pk": self.object.pk}
+            "training:training_records_create_exercise",
+            kwargs={"id": self.training_session_id},
         )
+
+    def form_valid(self, form):
+        template = form.cleaned_data.get("template")
+        training_session = self.create_training_from_template()
         self.create_exercise_records_from_template(
             template=template, training_session=training_session
         )
